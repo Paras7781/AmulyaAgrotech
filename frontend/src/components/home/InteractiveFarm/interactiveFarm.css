@@ -1,0 +1,1035 @@
+/* =========================================================
+   INTERACTIVE AMULYA FARM EXPERIENCE STYLES
+   ========================================================= */
+
+.farm-experience-section {
+  position: relative;
+  width: 100%;
+  background: #090e0b;
+  color: #f3f1e8;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  padding: clamp(60px, 7vw, 100px) 0;
+}
+
+[data-theme="light"] .farm-experience-section {
+  background: #edf0e6;
+  color: #171914;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.farm-container {
+  width: min(100%, var(--container-max, 1320px));
+  margin: 0 auto;
+  padding: 0 var(--gutter, clamp(16px, 2vw, 42px));
+}
+
+/* Header Area */
+.farm-section-header {
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+.farm-header-split {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.farm-header-left {
+  max-width: 680px;
+}
+
+.farm-header-left h2 {
+  margin: 16px 0 0;
+  font: 500 clamp(36px, 4.6vw, 64px) / 0.98 'Space Grotesk', sans-serif;
+  letter-spacing: -0.04em;
+}
+
+.farm-header-left h2 em {
+  font-style: normal;
+  color: var(--gold, #f2c230);
+}
+
+.farm-header-right {
+  max-width: 440px;
+}
+
+.farm-header-right p {
+  margin: 0 0 16px;
+  color: #a2a89c;
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.65;
+}
+
+[data-theme="light"] .farm-header-right p {
+  color: #5c6356;
+}
+
+.farm-header-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold, #f2c230);
+  background: rgba(242, 194, 48, 0.1);
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(242, 194, 48, 0.25);
+}
+
+.farm-header-cue-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold, #f2c230);
+  box-shadow: 0 0 8px var(--gold, #f2c230);
+  animation: farmPulseDot 2s infinite ease-in-out;
+}
+
+@keyframes farmPulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* =========================================================
+   STAGE: LANDSCAPE VIEWER & MAP HUD
+   ========================================================= */
+
+.farm-stage-wrap {
+  position: relative;
+  background: #0d140f;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.3s ease;
+}
+
+[data-theme="light"] .farm-stage-wrap {
+  background: #e3ebd9;
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+}
+
+/* Stage HUD Top Bar */
+.farm-stage-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: rgba(9, 14, 11, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  z-index: 10;
+  position: relative;
+}
+
+[data-theme="light"] .farm-stage-hud {
+  background: rgba(245, 247, 242, 0.95);
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+  color: #3b4237;
+}
+
+.farm-hud-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--gold, #f2c230);
+}
+
+.farm-hud-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38ef7d;
+  box-shadow: 0 0 8px #38ef7d;
+}
+
+.farm-hud-center {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="light"] .farm-hud-center {
+  color: #606859;
+}
+
+.farm-hud-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.farm-hud-count {
+  color: var(--gold, #f2c230);
+  font-weight: 600;
+}
+
+/* Landscape Canvas Container */
+.farm-canvas-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1200 / 680;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* SVG Rendering */
+.farm-landscape-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Light Mode SVG Theme Overrides */
+[data-theme="light"] .farm-sky-top { stop-color: #d6e8ce !important; }
+[data-theme="light"] .farm-sky-mid { stop-color: #e5f0df !important; }
+[data-theme="light"] .farm-sky-bottom { stop-color: #f2f7ec !important; }
+[data-theme="light"] .farm-mountain-far-top { stop-color: #aacba0 !important; }
+[data-theme="light"] .farm-mountain-far-bot { stop-color: #92bc87 !important; }
+[data-theme="light"] .farm-mountain-mid-top { stop-color: #88b37b !important; }
+[data-theme="light"] .farm-mountain-mid-bot { stop-color: #72a164 !important; }
+[data-theme="light"] .farm-base-ground { fill: #5c934b !important; }
+[data-theme="light"] .farm-field-green-light { stop-color: #6dae58 !important; }
+[data-theme="light"] .farm-field-green-dark { stop-color: #508a3d !important; }
+[data-theme="light"] .farm-field-wheat-light { stop-color: #cfbc72 !important; }
+[data-theme="light"] .farm-field-wheat-dark { stop-color: #aa9752 !important; }
+[data-theme="light"] .farm-field-orchard-light { stop-color: #589248 !important; }
+[data-theme="light"] .farm-field-orchard-dark { stop-color: #417333 !important; }
+[data-theme="light"] .farm-field-lower-green { fill: #487e3a !important; }
+[data-theme="light"] .farm-field-launch-ground { fill: #558d46 !important; }
+[data-theme="light"] .farm-canal-bank { fill: #3f473e !important; }
+[data-theme="light"] .farm-water-light { stop-color: #63b3c2 !important; }
+[data-theme="light"] .farm-water-mid { stop-color: #3b94a3 !important; }
+[data-theme="light"] .farm-water-dark { stop-color: #247582 !important; }
+[data-theme="light"] .farm-path-light { stop-color: #dfd4b7 !important; }
+[data-theme="light"] .farm-path-dark { stop-color: #c5b897 !important; }
+[data-theme="light"] .farm-furrow-line { stroke: rgba(0, 0, 0, 0.16) !important; }
+[data-theme="light"] .farm-furrow-secondary { stroke: rgba(255, 255, 255, 0.4) !important; }
+[data-theme="light"] .farm-furrow-line-alt { stroke: rgba(0, 0, 0, 0.14) !important; }
+
+/* SVG Hover & Active Animations */
+.farm-landmark-group {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.farm-landmark-group:hover,
+.farm-landmark-group.is-highlighted {
+  opacity: 1;
+}
+
+/* =========================================================
+   INTERACTIVE LANDMARK PINS (OVERLAY)
+   ========================================================= */
+
+.farm-pins-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.farm-landmark-pin-wrapper {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  z-index: 20;
+  transition: z-index 0.2s ease;
+}
+
+.farm-landmark-pin-wrapper.is-active,
+.farm-landmark-pin-wrapper.is-hovered {
+  z-index: 35;
+}
+
+.farm-landmark-pin-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.farm-landmark-pin-btn:focus-visible .farm-pin-core {
+  outline: 2px solid var(--gold, #f2c230);
+  outline-offset: 4px;
+}
+
+/* Pulsing Beacon Waves */
+.farm-pin-beacon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  border-radius: 50%;
+  background: rgba(242, 194, 48, 0.25);
+  border: 1px solid rgba(242, 194, 48, 0.5);
+  animation: farmBeaconPulse 2.8s infinite ease-out;
+  pointer-events: none;
+}
+
+@keyframes farmBeaconPulse {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  60% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.farm-landmark-pin-wrapper.is-active .farm-pin-beacon {
+  background: rgba(242, 194, 48, 0.45);
+  border-color: rgba(242, 194, 48, 0.9);
+  animation-duration: 1.8s;
+}
+
+/* Pin Core Badge */
+.farm-pin-core {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #101912;
+  border: 2px solid var(--gold, #f2c230);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 12px rgba(242, 194, 48, 0.35);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease;
+}
+
+[data-theme="light"] .farm-pin-core {
+  background: #203e26;
+  border-color: #f2c230;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25), 0 0 10px rgba(242, 194, 48, 0.3);
+}
+
+.farm-pin-num {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--gold, #f2c230);
+  color: #000;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 2px 5px;
+  border-radius: 6px;
+  border: 1px solid #000;
+}
+
+.farm-pin-icon {
+  color: var(--gold, #f2c230);
+  transition: transform 0.25s ease;
+}
+
+.farm-landmark-pin-btn:hover .farm-pin-core,
+.farm-landmark-pin-wrapper.is-active .farm-pin-core {
+  transform: scale(1.18);
+  background: #17241a;
+  border-color: #fff;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.6), 0 0 18px rgba(242, 194, 48, 0.65);
+}
+
+.farm-landmark-pin-wrapper.is-active .farm-pin-core {
+  background: var(--gold, #f2c230);
+  border-color: #fff;
+}
+
+.farm-landmark-pin-wrapper.is-active .farm-pin-icon {
+  color: #000;
+}
+
+/* Expandable Pin Chip */
+.farm-pin-chip {
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(12, 19, 14, 0.94);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(242, 194, 48, 0.35);
+  border-radius: 20px;
+  color: #fff;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+[data-theme="light"] .farm-pin-chip {
+  background: rgba(255, 255, 255, 0.96);
+  color: #171914;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.farm-chip-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold, #f2c230);
+}
+
+[data-theme="light"] .farm-chip-num {
+  color: #a97800;
+}
+
+.farm-chip-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.farm-landmark-pin-btn:hover .farm-pin-chip,
+.farm-landmark-pin-btn:focus .farm-pin-chip,
+.farm-landmark-pin-wrapper.is-active .farm-pin-chip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Adjust chip direction if near right edge */
+.farm-landmark-pin-wrapper[style*="left: 7"],
+.farm-landmark-pin-wrapper[style*="left: 8"],
+.farm-landmark-pin-wrapper[style*="left: 9"] {
+  /* Pins on right side show chip on left */
+}
+
+.farm-landmark-pin-wrapper[style*="left: 7"] .farm-pin-chip,
+.farm-landmark-pin-wrapper[style*="left: 8"] .farm-pin-chip,
+.farm-landmark-pin-wrapper[style*="left: 9"] .farm-pin-chip {
+  left: auto;
+  right: calc(100% + 10px);
+  transform: translateY(-50%) translateX(4px);
+}
+
+.farm-landmark-pin-wrapper[style*="left: 7"] .farm-landmark-pin-btn:hover .farm-pin-chip,
+.farm-landmark-pin-wrapper[style*="left: 8"] .farm-landmark-pin-btn:hover .farm-pin-chip,
+.farm-landmark-pin-wrapper[style*="left: 9"] .farm-landmark-pin-btn:hover .farm-pin-chip,
+.farm-landmark-pin-wrapper[style*="left: 7"].is-active .farm-pin-chip,
+.farm-landmark-pin-wrapper[style*="left: 8"].is-active .farm-pin-chip,
+.farm-landmark-pin-wrapper[style*="left: 9"].is-active .farm-pin-chip {
+  transform: translateY(-50%) translateX(0);
+}
+
+/* =========================================================
+   DETAIL INFORMATION PANEL (DOCKED / FLOATING HUD)
+   ========================================================= */
+
+.farm-detail-panel {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: min(360px, calc(100% - 40px));
+  max-height: calc(100% - 40px);
+  z-index: 40;
+  background: rgba(12, 18, 14, 0.94);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(242, 194, 48, 0.35);
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+  overflow-y: auto;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  animation: farmPanelFadeIn 0.3s ease;
+}
+
+@keyframes farmPanelFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+[data-theme="light"] .farm-detail-panel {
+  background: rgba(255, 255, 255, 0.97);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #171914;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+}
+
+.farm-detail-panel.is-preview {
+  opacity: 0.92;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.farm-detail-panel-inner {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Panel Header */
+.farm-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.farm-panel-tags {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.farm-panel-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #000;
+  background: var(--gold, #f2c230);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.farm-panel-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a5ac9f;
+}
+
+[data-theme="light"] .farm-panel-tag {
+  color: #5d6655;
+}
+
+.farm-panel-close-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+[data-theme="light"] .farm-panel-close-btn {
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #171914;
+}
+
+.farm-panel-close-btn:hover {
+  background: var(--gold, #f2c230);
+  border-color: var(--gold, #f2c230);
+  color: #000;
+}
+
+/* Panel Preview Image */
+.farm-panel-media {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+}
+
+.farm-panel-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.farm-detail-panel:hover .farm-panel-media img {
+  transform: scale(1.04);
+}
+
+.farm-panel-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.65) 100%);
+}
+
+.farm-panel-media-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(10, 15, 11, 0.85);
+  border: 1px solid rgba(242, 194, 48, 0.3);
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: #f2c230;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Panel Content Body */
+.farm-panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.farm-panel-title {
+  margin: 0;
+  font: 600 20px / 1.15 'Space Grotesk', sans-serif;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+[data-theme="light"] .farm-panel-title {
+  color: #171914;
+}
+
+.farm-panel-desc {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #d2d7cb;
+}
+
+[data-theme="light"] .farm-panel-desc {
+  color: #3b4237;
+}
+
+.farm-panel-detail {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #9aa292;
+  border-left: 2px solid var(--gold, #f2c230);
+  padding-left: 10px;
+}
+
+[data-theme="light"] .farm-panel-detail {
+  color: #555e4e;
+}
+
+/* Panel Explore CTA */
+.farm-panel-cta-row {
+  margin-top: 6px;
+}
+
+.farm-panel-explore-link {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Panel Footer / Pagination */
+.farm-panel-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .farm-panel-footer {
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+.farm-panel-counter {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--gold, #f2c230);
+}
+
+.farm-counter-sep {
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0 4px;
+}
+
+[data-theme="light"] .farm-counter-sep {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.farm-panel-nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.farm-nav-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+[data-theme="light"] .farm-nav-btn {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #171914;
+}
+
+.farm-nav-btn:hover {
+  background: var(--gold, #f2c230);
+  border-color: var(--gold, #f2c230);
+  color: #000;
+}
+
+/* =========================================================
+   QUICK DIRECTORY (RESPONSIVE GRID BELOW LANDSCAPE)
+   ========================================================= */
+
+.farm-quick-directory {
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.farm-quick-directory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.farm-quick-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold, #f2c230);
+}
+
+.farm-quick-eyebrow i {
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: var(--gold, #f2c230);
+}
+
+.farm-quick-instruction {
+  margin: 0;
+  font-size: 13px;
+  color: #92998a;
+}
+
+[data-theme="light"] .farm-quick-instruction {
+  color: #606859;
+}
+
+/* 6-Card Grid */
+.farm-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.farm-quick-card {
+  position: relative;
+  background: #0f1712;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+[data-theme="light"] .farm-quick-card {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.09);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+}
+
+.farm-quick-card:hover,
+.farm-quick-card.is-active {
+  border-color: var(--gold, #f2c230);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.farm-quick-card.is-active {
+  background: #142018;
+}
+
+[data-theme="light"] .farm-quick-card.is-active {
+  background: #f6faef;
+}
+
+.farm-quick-card-btn {
+  background: transparent;
+  border: 0;
+  padding: 20px 20px 14px;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  color: inherit;
+  outline: none;
+}
+
+.farm-quick-card-btn:focus-visible {
+  outline: 2px solid var(--gold, #f2c230);
+  outline-offset: -2px;
+}
+
+.farm-quick-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.farm-quick-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold, #f2c230);
+}
+
+[data-theme="light"] .farm-quick-num {
+  color: #a97800;
+}
+
+.farm-quick-icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(242, 194, 48, 0.1);
+  border: 1px solid rgba(242, 194, 48, 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold, #f2c230);
+}
+
+.farm-quick-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8c9384;
+  margin-left: auto;
+}
+
+[data-theme="light"] .farm-quick-tag {
+  color: #697262;
+}
+
+.farm-quick-title {
+  margin: 0 0 6px;
+  font: 600 16px / 1.25 'Space Grotesk', sans-serif;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+[data-theme="light"] .farm-quick-title {
+  color: #171914;
+}
+
+.farm-quick-desc {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #a6ad9f;
+}
+
+[data-theme="light"] .farm-quick-desc {
+  color: #555d4e;
+}
+
+.farm-quick-card-action {
+  padding: 10px 20px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] .farm-quick-card-action {
+  border-top-color: rgba(0, 0, 0, 0.05);
+}
+
+.farm-quick-route-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold, #f2c230);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+[data-theme="light"] .farm-quick-route-link {
+  color: #946800;
+  font-weight: 600;
+}
+
+.farm-quick-route-link:hover {
+  transform: translateX(3px);
+  color: #fff;
+}
+
+[data-theme="light"] .farm-quick-route-link:hover {
+  color: #000;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN (320px, 360px, 390px, 430px, 768px, 1024px, 1366px, 1440px, 1920px)
+   ========================================================= */
+
+@media (max-width: 1200px) {
+  .farm-quick-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .farm-header-split {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .farm-detail-panel {
+    top: auto;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    width: calc(100% - 24px);
+    max-height: 60%;
+  }
+
+  .farm-panel-media {
+    display: none; /* Conserve vertical space on tablet & mobile overlay */
+  }
+
+  .farm-pin-chip {
+    display: none; /* Hide wide hover chip on mobile/tablet to avoid overlapping */
+  }
+
+  .farm-pin-core {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@media (max-width: 768px) {
+  .farm-canvas-container {
+    aspect-ratio: 16 / 11;
+  }
+
+  .farm-stage-hud {
+    padding: 10px 14px;
+    font-size: 10px;
+  }
+
+  .farm-hud-center {
+    display: none;
+  }
+
+  .farm-quick-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .farm-detail-panel {
+    position: static;
+    width: 100%;
+    margin-top: 14px;
+    border-radius: 10px;
+    max-height: none;
+  }
+
+  .farm-panel-media {
+    display: block;
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .farm-canvas-container {
+    aspect-ratio: 4 / 3;
+  }
+
+  .farm-pin-core {
+    width: 30px;
+    height: 30px;
+  }
+
+  .farm-pin-num {
+    font-size: 8px;
+    padding: 1px 4px;
+  }
+
+  .farm-quick-card-btn {
+    padding: 16px 14px 12px;
+  }
+
+  .farm-quick-card-action {
+    padding: 8px 14px 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .farm-canvas-container {
+    aspect-ratio: 1 / 1;
+  }
+
+  .farm-pin-core {
+    width: 28px;
+    height: 28px;
+  }
+
+  .farm-stage-hud {
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+  }
+}
+
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  .farm-pin-beacon,
+  .farm-header-cue-dot {
+    animation: none !important;
+  }
+
+  .farm-stage-wrap,
+  .farm-landmark-pin-wrapper,
+  .farm-detail-panel,
+  .farm-quick-card {
+    transition: none !important;
+  }
+}
+

@@ -1,0 +1,1 @@
+export function SectionHeading({ kicker, title, copy }: { kicker: string; title: React.ReactNode; copy?: React.ReactNode }) { return <div className="section-heading"><div><div className="eyebrow dark"><span/> {kicker}</div><h2>{title}</h2></div>{copy && <div className="heading-copy">{copy}</div>}</div>; }
