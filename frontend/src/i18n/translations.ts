@@ -611,3 +611,45 @@ export const translations = {
     },
   },
 } as const;
+
+export const faqAnswers: Record<Language, { drones: readonly string[]; subsidy: readonly string[] }> = {
+  en: {
+    drones: [
+      "Specifications vary by model and intended use. Contact us with your field requirements to discuss the relevant details.",
+      "Use the quotation form to share your requirements and request a product quotation.",
+      "Contact us to confirm support details for the selected drone.",
+    ],
+    subsidy: [
+      "This page provides general information, not official subsidy guidance. Verify current scheme details with the relevant government authority.",
+      "Eligibility and documentation depend on the scheme and location. Confirm requirements for your situation with the relevant authority.",
+      "Use the contact form to ask about the document checklist and application process; verify current requirements with the relevant authority.",
+      "No. This page provides general guidance only. The relevant government authority determines final eligibility.",
+    ],
+  },
+  hi: {
+    drones: [
+      "विनिर्देश मॉडल और उपयोग के अनुसार अलग-अलग हो सकते हैं। संबंधित जानकारी के लिए अपने खेत की आवश्यकताओं सहित हमसे संपर्क करें।",
+      "अपनी आवश्यकताएँ साझा करने और कोटेशन का अनुरोध करने के लिए कोटेशन फ़ॉर्म का उपयोग करें।",
+      "अपने चुने हुए ड्रोन के लिए उपलब्ध सहायता विकल्पों की पुष्टि करने हेतु हमसे संपर्क करें।",
+    ],
+    subsidy: [
+      "यह पृष्ठ सामान्य जानकारी देता है, आधिकारिक सब्सिडी मार्गदर्शन नहीं। वर्तमान योजना विवरण संबंधित सरकारी प्राधिकरण से सत्यापित करें।",
+      "पात्रता और दस्तावेज़ योजना और स्थान पर निर्भर करते हैं। अपनी स्थिति के लिए आवश्यकताओं की पुष्टि संबंधित प्राधिकरण से करें।",
+      "दस्तावेज़ सूची और प्रक्रिया के बारे में पूछने के लिए संपर्क फ़ॉर्म का उपयोग करें; वर्तमान आवश्यकताओं की पुष्टि संबंधित प्राधिकरण से करें।",
+      "नहीं। यह पृष्ठ केवल सामान्य मार्गदर्शन देता है। अंतिम पात्रता का निर्णय संबंधित सरकारी प्राधिकरण करता है।",
+    ],
+  },
+  mr: {
+    drones: [
+      "वैशिष्ट्ये मॉडेल आणि वापरानुसार बदलू शकतात. संबंधित माहितीसाठी तुमच्या शेताच्या गरजांसह आमच्याशी संपर्क साधा.",
+      "तुमच्या गरजा सांगून कोटेशन मागण्यासाठी कोटेशन फॉर्म वापरा.",
+      "निवडलेल्या ड्रोनसाठी उपलब्ध सहाय्य पर्यायांची पुष्टी करण्यासाठी आमच्याशी संपर्क साधा.",
+    ],
+    subsidy: [
+      "हे पृष्ठ सामान्य माहिती देते; अधिकृत सब्सिडी मार्गदर्शन नाही. सध्याच्या योजनेचे तपशील संबंधित शासकीय प्राधिकरणाकडून तपासा.",
+      "पात्रता आणि कागदपत्रे योजना व ठिकाणानुसार बदलतात. तुमच्या परिस्थितीतील आवश्यकतांची संबंधित प्राधिकरणाकडून खात्री करा.",
+      "कागदपत्रांच्या यादीबद्दल आणि प्रक्रियेबद्दल विचारण्यासाठी संपर्क फॉर्म वापरा; सध्याच्या आवश्यकतांची पुष्टी संबंधित प्राधिकरणाकडून करा.",
+      "नाही. हे पृष्ठ फक्त सामान्य मार्गदर्शन देते. अंतिम पात्रतेचा निर्णय संबंधित शासकीय प्राधिकरण घेते.",
+    ],
+  },
+};

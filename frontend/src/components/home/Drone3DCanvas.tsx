@@ -240,13 +240,11 @@ export function Drone3DCanvas({
 
     const modelBounds = new THREE.Box3().setFromObject(droneGroup);
     const modelCenter = modelBounds.getCenter(new THREE.Vector3());
+    const modelRadius = modelBounds.getBoundingSphere(new THREE.Sphere()).radius;
     droneGroup.position.sub(modelCenter);
     const centeredPositionY = dronePivot.position.y;
     dronePivot.rotation.x = 0.24;
     dronePivot.rotation.y = variant === 'hero' ? -0.45 : 0.6;
-    dronePivot.updateMatrixWorld(true);
-    const framedBounds = new THREE.Box3().setFromObject(dronePivot);
-    const frameCenter = framedBounds.getCenter(new THREE.Vector3());
 
     const frameCamera = (frameWidth: number, frameHeight: number) => {
       if (!frameWidth || !frameHeight) return;
@@ -254,42 +252,11 @@ export function Drone3DCanvas({
       const verticalFov = THREE.MathUtils.degToRad(camera.fov);
       const verticalTangent = Math.tan(verticalFov / 2);
       const horizontalTangent = verticalTangent * camera.aspect;
-      const fitMargin = 0.82;
-      const corners = [
-        new THREE.Vector3(framedBounds.min.x, framedBounds.min.y, framedBounds.min.z).sub(frameCenter),
-        new THREE.Vector3(framedBounds.min.x, framedBounds.min.y, framedBounds.max.z).sub(frameCenter),
-        new THREE.Vector3(framedBounds.min.x, framedBounds.max.y, framedBounds.min.z).sub(frameCenter),
-        new THREE.Vector3(framedBounds.min.x, framedBounds.max.y, framedBounds.max.z).sub(frameCenter),
-        new THREE.Vector3(framedBounds.max.x, framedBounds.min.y, framedBounds.min.z).sub(frameCenter),
-        new THREE.Vector3(framedBounds.max.x, framedBounds.min.y, framedBounds.max.z).sub(frameCenter),
-        new THREE.Vector3(framedBounds.max.x, framedBounds.max.y, framedBounds.min.z).sub(frameCenter),
-        new THREE.Vector3(framedBounds.max.x, framedBounds.max.y, framedBounds.max.z).sub(frameCenter),
-      ];
-      const fitDistance = corners.reduce((distance, point) => Math.max(
-        distance,
-        point.z + Math.abs(point.x) / (horizontalTangent * fitMargin),
-        point.z + Math.abs(point.y) / (verticalTangent * fitMargin),
-      ), 1);
-      const projectedBounds = corners.reduce((bounds, point) => {
-        const depth = fitDistance - point.z;
-        const projectedX = point.x / (depth * horizontalTangent);
-        const projectedY = point.y / (depth * verticalTangent);
-        return {
-          minX: Math.min(bounds.minX, projectedX),
-          maxX: Math.max(bounds.maxX, projectedX),
-          minY: Math.min(bounds.minY, projectedY),
-          maxY: Math.max(bounds.maxY, projectedY),
-        };
-      }, {
-        minX: Number.POSITIVE_INFINITY,
-        maxX: Number.NEGATIVE_INFINITY,
-        minY: Number.POSITIVE_INFINITY,
-        maxY: Number.NEGATIVE_INFINITY,
-      });
-      const target = frameCenter.clone();
-      target.x += ((projectedBounds.minX + projectedBounds.maxX) / 2) * fitDistance * horizontalTangent;
-      target.y += ((projectedBounds.minY + projectedBounds.maxY) / 2) * fitDistance * verticalTangent;
-      camera.position.set(target.x, target.y, target.z + fitDistance * 1.02);
+      const fitMargin = 0.8;
+      const limitingHalfAngle = Math.atan(Math.min(horizontalTangent, verticalTangent) * fitMargin);
+      const fitDistance = modelRadius / Math.sin(limitingHalfAngle);
+      const target = new THREE.Vector3(0, centeredPositionY, 0);
+      camera.position.set(target.x, target.y, target.z + fitDistance * 1.04);
       camera.lookAt(target);
       camera.updateProjectionMatrix();
       renderer.setSize(frameWidth, frameHeight);
